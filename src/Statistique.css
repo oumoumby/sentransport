@@ -1,0 +1,25 @@
+.statistique-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 150px;
+}
+
+.statistique-chiffre {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #0a6e31;
+  margin-bottom: 8px;
+}
+
+.statistique-libelle {
+  font-size: 1rem;
+  color: #2c3e50;
+  font-weight: 500;
+}

@@ -6,6 +6,14 @@ return (
         <p className =" header - soustitre ">
         Votre guide du transport en commun a Dakar
         </p>
+        <p className =" header - datedujour ">
+        {new Date().toLocaleDateString('fr-FR', {
+        weekday: 'long',
+        year: 'numeric',        
+        month: 'long',
+        day: 'numeric',
+        })}
+        </p>
         </ header>
 );
 }
