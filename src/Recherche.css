@@ -1,16 +1,35 @@
 .recherche {
   margin-bottom: 20px;
+  display: flex;
+  align-items: stretch;
 }
 
 .recherche-input {
-  width: 100%;
+  width: calc(100% - 90px);
   padding: 12px 16px;
   font-size: 1rem;
   border: 2px solid #dcdde1;
-  border-radius: 8px;
+  border-radius: 8px 0 0 8px;
   outline: none;
   box-sizing: border-box;
   transition: border-color 0.2s;
+}
+
+.recherche-clear {
+  width: 80px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 2px solid #dcdde1;
+  border-left: none;
+  border-radius: 0 8px 8px 0;
+  background: #f5f6fa;
+  color: #2d3436;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.recherche-clear:hover {
+  background: #dfe6e9;
 }
 
 .recherche-input:focus {

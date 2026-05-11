@@ -20,6 +20,13 @@
     padding: 12px;
   }
 }
+.compteur-recherches {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 10px 0;
+  font-weight: 600;
+}
 .ligne-bus {
 padding: 10px 12px;
 }

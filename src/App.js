@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Header from './Header';
 import Recherche from './Recherche';
@@ -9,6 +9,26 @@ import Footer from './Footer';
 function App() {
   const [recherche, setRecherche] = useState('');
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
+  const [compteurRecherches, setCompteurRecherches] = useState(0);
+  const isInitialMount = useRef(true);
+
+  const handleRechercheChange = (valeur) => {
+    setRecherche(valeur);
+  };
+
+  const handleClearRecherche = () => {
+    if (recherche !== '') {
+      setRecherche('');
+    }
+  };
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    setCompteurRecherches(prev => prev + 1);
+  }, [recherche]);
 
   const lignes = [
     {
@@ -75,26 +95,35 @@ function App() {
       setLigneSelectionnee(ligne);
     }
   }
+   
 
   return (
     <div className="App">
       <Header />
+      <p className="compteur-recherches">
+        Vous avez effectué {compteurRecherches} recherche{compteurRecherches > 1 ? 's' : ''}.
+      </p>
       <main className="contenu">
-        <Recherche valeur={recherche} onChange={setRecherche} />
+        <Recherche valeur={recherche} onChange={handleRechercheChange} onClear={handleClearRecherche} />
         <p className="resultat-recherche">
           {lignesFiltrees.length} ligne{lignesFiltrees.length > 1 ? 's' : ''} trouvée{lignesFiltrees.length > 1 ? 's' : ''}
         </p>
-        {lignesFiltrees.map((ligne) => (
-          <LigneBus
-            key={ligne.id}
-            numero={ligne.numero}
-            depart={ligne.depart}
-            arrivee={ligne.arrivee}
-            arrets={ligne.arrets}
-            estSelectionnee={ligneSelectionnee && ligneSelectionnee.id === ligne.id}
-            onClick={() => handleClickLigne(ligne)}
-          />
-        ))}
+        {lignesFiltrees.length === 0 ? (
+          <p className="aucune-ligne">Aucune ligne trouvée</p>
+        ) : (
+          lignesFiltrees.map((ligne) => (
+            <LigneBus
+              key={ligne.id}
+              numero={ligne.numero}
+              depart={ligne.depart}
+              arrivee={ligne.arrivee}
+              arrets={ligne.arrets}
+              estSelectionnee={ligneSelectionnee && ligneSelectionnee.id === ligne.id}
+              onClick={() => handleClickLigne(ligne)}
+              
+            />
+          ))
+        )}
         {ligneSelectionnee && <DetailLigne ligne={ligneSelectionnee} />}
       </main>
       <Footer />
